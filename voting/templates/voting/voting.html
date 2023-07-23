@@ -1,0 +1,33 @@
+
+{% extends 'homepage/base.html'%}
+
+{% block htmlhead %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/voting.css' %}">
+{% endblock htmlhead%}
+   
+  
+    {% block content %}
+    <img src="{% static 'img/Group 3.png' %}"  class="header" >      
+    <form action="" method="post">
+        {%csrf_token%}
+        
+        
+        
+        
+        {% for candidate in candidates %}
+            <img src="{% static 'img/Group 4.png' %}">
+            <img src="{{voter.voter_image.url}}" class="img">
+
+            <div class="container">
+                <p class="name" >Name:{{ candidate.first_name }} {{candidate.second_name}} </p>
+                <p class="rno" >Roll no: {{candidate.roll_no}}</p>
+                <p class="dept" >Department: {{candidate.department}} </p>
+                
+            </div>
+            <input type="radio" name="choice" class="choice" id="choice{{ forloop.counter }}" value="{{candidate.roll_no}}" >
+        {% endfor %}
+        <input type="text" name="rollno" value="{{roll_no}}" style="display: none;">
+        <input type="submit" value="vote">
+    </form>
+    {%endblock content%}
